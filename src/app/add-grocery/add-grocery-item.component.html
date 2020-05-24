@@ -1,0 +1,168 @@
+<div class="card">
+    <div class="card-header">
+      {{pageTitle}}
+    </div>
+  
+    <div class="card-body">
+      <form novalidate
+            (ngSubmit)="saveProduct()"
+            [formGroup]="groceryForm">
+  
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="productNameId">Item Name</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="productNameId"
+                   type="text"
+                   placeholder="Name (required)"
+                   formControlName="productName"
+                   [ngClass]="{'is-invalid': (groceryForm.get('productName').touched ||
+                   groceryForm.get('productName').dirty) &&
+                   !groceryForm.get('productName').valid }" />
+            <span class="invalid-feedback">
+              <span *ngIf="groceryForm.get('productName').errors?.required">
+                Please enter Product Name!
+              </span>
+              <span *ngIf="groceryForm.get('productName').errors?.minlength">
+                Name must be longer than 3 characters.
+              </span>
+              <span *ngIf="groceryForm.get('productName').errors?.maxlength">
+                Name should not exceed 50 characters.
+              </span>
+            </span>
+          </div>
+        </div>
+  
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="quantityId">Quantity</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="quantityId"
+                   type="number"
+                   placeholder="Quantity (required)"
+                   formControlName="quantity"
+                   [ngClass]="{'is-invalid': (groceryForm.get('quantity').touched ||
+                   groceryForm.get('quantity').dirty) &&
+                   !groceryForm.get('quantity').valid }" />
+            <span class="invalid-feedback">
+              <span *ngIf="groceryForm.get('quantity').errors?.required">
+                Please enter items available quantity .
+              </span>
+              <span *ngIf="groceryForm.get('quantity').errors?.quantity">
+                Please enter valid available quantity .
+              </span>
+            </span>
+          </div>
+        </div>
+  
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="starRatingId">Star Rating (1-5)</label>
+  
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="starRatingId"
+                   type="number"
+                   placeholder="Rating (1-5)"
+                   formControlName="starRating"
+                   [ngClass]="{'is-invalid': (groceryForm.get('starRating').touched ||
+                   groceryForm.get('starRating').dirty) &&
+                   !groceryForm.get('starRating').valid }" />
+            <span class="invalid-feedback">
+              <span *ngIf="groceryForm.get('quantity').errors?.required">
+                Please enter rating between 1-5.
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="priceId">Price</label>
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="priceId"
+                   type="number"
+                   placeholder="Price"
+                   formControlName="price"
+                   [ngClass]="{'is-invalid': (groceryForm.get('price').touched ||
+                     groceryForm.get('price').dirty) &&
+                     !groceryForm.get('price').valid }" />
+            <span class="invalid-feedback">
+              <span *ngIf="groceryForm.get('price').errors?.required">
+                Please enter Price.
+           </span>
+           <span *ngIf="groceryForm.get('price').errors?.price">
+               Please enter valid Price.
+           </span>
+            </span>
+          </div>
+        </div>
+        
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="dateId">Available Date</label>
+  
+          <div class="col-md-8">
+            <input class="form-control"
+                   id="dateId"
+                   type="date"
+                   placeholder="Release Date"
+                   formControlName="releaseDate"
+                   [ngClass]="{'is-invalid': (groceryForm.get('releaseDate').touched ||
+                   groceryForm.get('releaseDate').dirty) &&
+                   !groceryForm.get('releaseDate').valid }" />
+            <span class="invalid-feedback">
+              <span *ngIf="groceryForm.get('releaseDate').errors?.required">
+                Please enter valid date.
+              </span>
+              <span *ngIf="groceryForm.get('releaseDate').errors?.releaseDate">
+                Please enter valid Date.
+            </span>
+            </span>
+          </div>
+        </div>
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label"
+                 for="descriptionId">Description</label>
+  
+          <div class="col-md-8">
+            <textarea class="form-control"
+                      id="descriptionId"
+                      placeholder="Description"
+                      rows=3
+                      formControlName="description"
+                     ></textarea>
+          </div>
+        </div>
+  
+        <div class="form-group row mb-2">
+          <div class="offset-md-2 col-md-4">
+            <button class="btn btn-primary mr-3"
+                    style="width:80px;"
+                    type="submit"
+                    [title]="groceryForm.valid ? 'Save your entered data' : 'Disabled until the form data is valid'"
+                    [disabled]="!groceryForm.valid">
+              Save
+            </button>
+            <button class="btn btn-outline-secondary mr-3"
+                    style="width:80px;"
+                    type="button"
+                    title="Cancel your edits"
+                    [routerLink]="['/products']">
+              Cancel
+            </button>
+            <button class="btn btn-outline-warning"
+                    style="width:90px"
+                    type="button"
+                    title="Delete this product"
+                    (click)="deleteProduct()">
+              Remove
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
